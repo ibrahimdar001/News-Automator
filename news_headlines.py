@@ -1,13 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from datetime import date
 import pandas as pd
 
 website = "https://www.thesun.co.uk/sport/football/"
 
 
 options = Options()
-options.add_argument("--headless")
+options.add_argument("headless")
 driver = webdriver.Chrome(options=options)
 
 driver.get(website)
@@ -43,7 +44,7 @@ for news in news_container:
 news_dict = {'Title':news_titles, 'Subtitle':news_subtitles, 'Link':news_links}
 
 headlines_df = pd.DataFrame(news_dict)
-headlines_df.to_csv('headlines.csv')
+headlines_df.to_csv('headlines.csv' + str(date.today()))
 
 driver.close()
 
